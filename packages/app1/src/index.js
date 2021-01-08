@@ -5,7 +5,6 @@ let manifestUrl = "http://localhost:3001/m/app1";
 if (search.ring) {
   manifestUrl = `${manifestUrl}/${search.ring}`;
 }
-console.log(search);
 
 fetch(manifestUrl)
   .then((res) => res.json())
