@@ -27,8 +27,8 @@ const clientConfig = {
     new webpack.container.ModuleFederationPlugin({
       name: "app1",
       remotes: {
-        app2: "app2@http://localhost:3001/r/app2/remoteEntry.js",
-        app3: "app3@http://localhost:3001/r/app3/remoteEntry.js",
+        app2: externalizeRemote("app2"),
+        app3: externalizeRemote("app3"),
       },
       shared,
     }),
@@ -44,3 +44,18 @@ const clientConfig = {
 };
 
 module.exports = [clientConfig];
+
+function externalizeRemote(remoteName) {
+  return {
+    external: `promise new Promise((resolve)=>{
+    const element = document.createElement("script");
+    element.src = __manifest__.${remoteName};
+    element.type = "text/javascript";
+    element.async = true;
+    element.onload = () => {
+      resolve(window.${remoteName});
+    };
+    document.head.appendChild(element);
+  })`,
+  };
+}
