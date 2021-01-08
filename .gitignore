@@ -2,3 +2,13 @@ node_modules
 dist
 lib
 cdn
+
+# testing
+coverage/
+
+# next.js
+.next/
+out/
+
+# production
+build/
