@@ -1,1 +1,1 @@
-"# federated-manifest-service" 
+# federated-manifest-service

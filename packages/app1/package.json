@@ -1,0 +1,23 @@
+{
+  "name": "app1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.7",
+    "server-side-module-federation-plugin": "*",
+    "axios": "^0.21.0",
+    "express": "^4.17.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "concurrently": "^5.3.0",
+    "regenerator-runtime": "^0.13.7",
+    "core-js": "^3.8.2"
+  }
+}
