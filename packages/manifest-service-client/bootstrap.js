@@ -11,7 +11,6 @@ export function bootstrapManifest(server, app) {
   }
 
   if (search.override) {
-    console.log(search.override);
     try {
       override = JSON.parse(search.override);
     } catch (e) {

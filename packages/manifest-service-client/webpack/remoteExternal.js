@@ -1,14 +1,21 @@
+const webpack = require("webpack");
+
 module.exports = function remoteExternal(remoteName) {
   return {
-    external: `promise new Promise((resolve)=>{
-    const element = document.createElement("script");
-    element.src = __manifest__.${remoteName};
-    element.type = "text/javascript";
-    element.async = true;
-    element.onload = () => {
-      resolve(window.${remoteName});
-    };
-    document.head.appendChild(element);
-  })`,
+    external: `promise "use strict";
+    var error = new Error();
+    module.exports = new Promise((resolve, reject) => {
+      if(typeof ${remoteName} !== "undefined") return resolve();
+      ${webpack.RuntimeGlobals.loadScript}(__manifest__.${remoteName}, (event) => {
+        if(typeof ${remoteName} !== "undefined") return resolve();
+        var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+        var realSrc = event && event.target && event.target.src;
+        error.message = 'Loading script failed.\\n(' + errorType + ': ' + realSrc + ')';
+        error.name = 'ScriptExternalLoadError';
+        error.type = errorType;
+        error.request = realSrc;
+        reject(error);
+      }, "${remoteName}");
+    }).then(() => ${remoteName});`,
   };
 };

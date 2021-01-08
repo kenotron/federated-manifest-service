@@ -22,6 +22,7 @@ app.use(cors());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+/** @deprecated */
 app.get("/r/:remote/:file", (req, res) => {
   const { remote, file } = req.params;
   res.sendFile(path.join(__dirname, `../cdn/${remote}/${manifest[remote]}/${file}`));
