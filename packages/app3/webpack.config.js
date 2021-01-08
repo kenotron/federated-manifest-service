@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+const { remoteExternal } = require("manifest-service-client/webpack");
 
 const exposes = {
   "./Shared": "./src/Shared",
@@ -29,7 +30,7 @@ const clientConfig = {
       exposes,
       filename: "remoteEntry.js",
       remotes: {
-        app2: externalizeRemote("app2"),
+        app2: remoteExternal("app2"),
       },
       shared,
     }),
@@ -43,18 +44,3 @@ const clientConfig = {
 };
 
 module.exports = [clientConfig];
-
-function externalizeRemote(remoteName) {
-  return {
-    external: `promise new Promise((resolve)=>{
-    const element = document.createElement("script");
-    element.src = __manifest__.${remoteName};
-    element.type = "text/javascript";
-    element.async = true;
-    element.onload = () => {
-      resolve(window.${remoteName});
-    };
-    document.head.appendChild(element);
-  })`,
-  };
-}
