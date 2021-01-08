@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 
 const remotes = () => ({
-  app2: "app2@http://localhost:3001/app2/remoteEntry.js",
+  app2: "app2@http://localhost:3001/r/app2/remoteEntry.js",
 });
 
 const exposes = {

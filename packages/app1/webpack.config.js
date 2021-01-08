@@ -27,8 +27,8 @@ const clientConfig = {
     new webpack.container.ModuleFederationPlugin({
       name: "app1",
       remotes: {
-        app2: "app2@http://localhost:3001/app2/remoteEntry.js",
-        app3: "app3@http://localhost:3001/app3/remoteEntry.js",
+        app2: "app2@http://localhost:3001/r/app2/remoteEntry.js",
+        app3: "app3@http://localhost:3001/r/app3/remoteEntry.js",
       },
       shared,
     }),
