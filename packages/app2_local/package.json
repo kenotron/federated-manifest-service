@@ -1,0 +1,16 @@
+{
+  "name": "app2_local",
+  "version": "1.2.3",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve"
+  },
+  "devDependencies": {
+    "server-side-module-federation-plugin": "*",
+    "http-server": "^0.12.3",
+    "react": "^17.0.1"
+  }
+}
